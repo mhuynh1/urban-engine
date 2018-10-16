@@ -3,8 +3,8 @@ import * as http from 'http';
 import * as WebSocket from 'ws';
 let uniqueId = Date.now();
 const app = express();
-app.use(express.static('dist/public')) // generated js files
-app.use(express.static('public')) // has index.html
+app.use(express.static('dist/src')) // generated js files
+app.use(express.static('src')) // has index.html
 
 // creates an http server
 const server = http.createServer(app);
