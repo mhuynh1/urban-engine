@@ -1,0 +1,68 @@
+body {
+    font-family: 'Open Sans', 'Lucida Grande', Arial, Helvetica, sans-serif;
+    margin: 0;
+    height: 100%;
+}
+
+h2 {
+    background: #767eab;
+    margin: 0;
+    padding: .5rem;
+    line-height: 1.4;
+    font-size: 1rem;
+    color: white;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    height: 100%
+}
+
+aside {
+    width: 30%;
+    padding: .5rem;
+    text-align: center;
+}
+
+.chatBox {
+    flex: 3;
+    background: #f5f8fd;
+    padding: 1rem 2rem;
+}
+
+.message {
+    margin-bottom: .7rem;
+}
+
+.name {
+    font-weight: 700;
+}
+
+.message p {
+    display: inline-block;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+.ts,
+.io {
+    font-size: smaller;
+    color: #afafaf;
+    font-style: oblique;
+}
+
+.io {
+    text-align: center;
+}
+
+ul {
+    padding: 0;
+}
+
+.usersList .name {
+    list-style-type: none;
+    border-bottom: 2px solid #8189b4;
+    padding: .5rem;
+}
