@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as http from 'http';
 import * as WebSocket from 'ws';
-
+let uniqueId = Date.now();
 const app = express();
 app.use(express.static('dist/public')) // generated js files
 app.use(express.static('public')) // has index.html
@@ -11,12 +11,25 @@ const server = http.createServer(app);
 
 // create WebSocket server instance
 const io = new WebSocket.Server({ server })
+interface SocketIFace extends WebSocket {
+    [key: string]: any
+}
 
+io.on('connection', (socket: SocketIFace) => {
+    console.log('new connection opened')
+    socket.send(`${JSON.stringify({ type: "id", id: uniqueId })}`);
+    uniqueId++; // will be assigned to next connection
 
-io.on('connection', (socket: WebSocket) => {
     socket.on("message", (m: string) => {
         const msg = JSON.parse(m)
         console.log('msg from client:', msg)
+
+        if (msg.type === "username") {
+            socket.username = msg.username
+            io.clients.forEach(client => {
+                client.send(`${JSON.stringify(msg)}`)
+            })
+        }
     })
 })
 
