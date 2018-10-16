@@ -26,10 +26,25 @@ io.on('connection', (socket: SocketIFace) => {
 
         if (msg.type === "username") {
             socket.username = msg.username
-            io.clients.forEach(client => {
-                client.send(`${JSON.stringify(msg)}`)
+
+            //get list of usernames to send back to client to render
+            const usernamesList: string[] = [];
+
+            io.clients.forEach((client: SocketIFace) => {
+                usernamesList.push(client.username)
             })
+
+            io.clients.forEach(client => {
+                client.send(`${JSON.stringify({ type: "usernamesList", namesList: usernamesList })}`)
+            })
+
+        } else if (msg.type === "message") {
+            msg.username = socket.username
         }
+
+        io.clients.forEach(client => {
+            client.send(`${JSON.stringify(msg)}`)
+        })
     })
 })
 

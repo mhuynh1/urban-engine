@@ -35,17 +35,41 @@ const login = (): void => {
     }
     io.onmessage = (e: MessageEvent) => {
         const msg = JSON.parse(e.data)
+        let html = "";
+        const ts = new Date(msg.timestamp).toLocaleTimeString()
 
         if (msg.type === "id") {
             clientId = msg.id
             setusername();
         } else if (msg.type === "username") {
-            let html = "";
-            const ts = new Date(msg.timestamp).toLocaleTimeString()
             html =
                 (`<div class="io">
                     <em>${msg.username} ${msg.status} ${ts}</em>
                 </div>`);
+
+        } else if (msg.type === "message") {
+            html =
+                (`<div class="message">
+                    <div class="name">
+                        ${msg.username}
+                    </div>
+                    <p>
+                        ${msg.body}
+                    </p>
+                    <span class="ts">
+                        ${ts}
+                    </span>
+                </div>`);
+        } else if (msg.type === "usernamesList") {
+            const list: string[] = msg.namesList
+            let namesList = ""
+            list.forEach(n => {
+                namesList += `<li class="name">${n}</li>`
+            });
+            (document.getElementById('usersList') as HTMLElement).innerHTML = namesList
+        }
+
+        if (html.length) {
             (document.getElementById('messages') as HTMLElement).insertAdjacentHTML('beforeend', html);
 
         }
@@ -53,11 +77,12 @@ const login = (): void => {
 }
 
 const addMessage = (e: Event): false => {
-    const msgData = {
-        username: (document.getElementById('name') as HTMLInputElement).value,
+    const msgData: MsgIFace = {
         body: (document.getElementById('message') as HTMLInputElement).value,
         likedBy: [],
         timestamp: Date.now(),
+        type: 'message',
+        uid: clientId,
     }
 
     //must send payload as JSON formatted string
