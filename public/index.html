@@ -18,10 +18,10 @@
             <div id="login">
                 <label>name</label>
                 <input id="name" type="text" placeholder="Your name" value="" required>
-                <button id="" type="submit">Click to Chat!</button>
+                <button onClick="login()" type="submit">Click to Chat!</button>
             </div>
             <section id="messages"></section>
-            <form id="form" action="submit" onsubmit="return addMessage(this)">
+            <form id="form" hidden="true" action="submit" onsubmit="return addMessage(this)">
                 <input id="message" type="text" value="" placeholder="Message" required>
                 <button type="submit">Send</button>
             </form>

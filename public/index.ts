@@ -1,9 +1,16 @@
 const serverUrl = 'ws://localhost';
-let io: WebSocket = new WebSocket(serverUrl);
+let io: WebSocket;
 
-io.onopen = (e: Event): void => {
-    io.send(JSON.stringify({ greeting: 'ahoy!' }))
-    console.log('socket connected')
+
+const login = (): void => {
+    io = new WebSocket(serverUrl);
+
+    io.onopen = (e: Event): void => {
+        io.send(JSON.stringify({ username: (document.getElementById("name") as HTMLInputElement).value }))
+        console.log('socket connected');
+        (document.getElementById("form") as HTMLElement).hidden = false;
+        (document.getElementById("login") as HTMLElement).hidden = true;
+    }
 }
 
 const addMessage = (e: Event): false => {
@@ -13,7 +20,7 @@ const addMessage = (e: Event): false => {
         likedBy: [],
         timestamp: Date.now(),
     }
-    
+
     //must send payload as JSON formatted string
     io.send(JSON.stringify(msgData));
 
