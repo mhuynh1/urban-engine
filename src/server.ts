@@ -46,6 +46,20 @@ io.on('connection', (socket: SocketIFace) => {
             client.send(`${JSON.stringify(msg)}`)
         })
     })
+
+    socket.onclose = (e: object) => {
+        const usernamesList: string[] = [];
+
+        io.clients.forEach((client: SocketIFace) => {
+            client.send(`${JSON.stringify({ username: socket.username, type: "username", status: "left at", timestamp: Date.now() })}`)
+            usernamesList.push(client.username)
+        });
+
+        io.clients.forEach((client: SocketIFace) => {
+            client.send(`${JSON.stringify({ type: "usernamesList", namesList: usernamesList })}`)
+        });
+
+    }
 })
 
 const PORT: number = 80

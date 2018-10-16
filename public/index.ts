@@ -74,6 +74,11 @@ const login = (): void => {
 
         }
     }
+
+    io.onclose = (e: Event) => {
+        console.warn('server disconnected :(');
+        (document.getElementById('messages') as HTMLElement).innerHTML = 'server disconnected :('
+    }
 }
 
 const addMessage = (e: Event): false => {
