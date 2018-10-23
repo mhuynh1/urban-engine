@@ -2,7 +2,7 @@
   "name": "ts-expressnodewebsocket",
   "version": "1.0.0",
   "description": "TypeScript + Express + Node + WebSocket",
-  "main": "dist/src/server.js",
+  "main": "server.js",
   "scripts": {
     "start": "node dist/src/server.js",
     "build": "tsc",
