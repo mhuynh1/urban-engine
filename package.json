@@ -2,8 +2,9 @@
   "name": "ts-expressnodewebsocket",
   "version": "1.0.0",
   "description": "TypeScript + Express + Node + WebSocket",
-  "main": "index.js",
+  "main": "dist/src/server.js",
   "scripts": {
+    "start": "node ./dist/src/server.js",
     "build": "tsc",
     "watch-ts": "tsc -w",
     "watch-node": "nodemon dist/src/server.js",
