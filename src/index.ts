@@ -1,4 +1,4 @@
-const serverUrl = 'ws://localhost';
+const serverUrl = 'ws://basic-node-express-websocket.herokuapp.com';
 let io: WebSocket;
 let clientId: number;
 
