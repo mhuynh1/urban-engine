@@ -1,5 +1,5 @@
 # Simple websocket setup on Node/Express
-
+see it live here: [hosted on heroku](https://basic-node-express-websocket.herokuapp.com/)
 
 ## Reqs
 
